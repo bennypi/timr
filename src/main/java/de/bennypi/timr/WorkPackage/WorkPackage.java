@@ -1,4 +1,4 @@
-package de.bennypi.timr;
+package de.bennypi.timr.WorkPackage;
 
 import java.util.Calendar;
 import java.util.UUID;
@@ -45,6 +45,11 @@ public class WorkPackage {
 
 	public UUID getId() {
 		return this.id;
+	}
+
+	@Override
+	public String toString() {
+		return "Details for workpackage " + id + "\n" + "Starting Time: " + startingTime.getTime().toString();
 	}
 
 	public static class WorkPackageBuilder {

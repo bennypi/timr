@@ -1,18 +1,18 @@
-package de.bennypi.timr;
+package de.bennypi.timr.WorkPackage;
 
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class WorkPackageList {
+public class WorkPackageHandler {
 
 	private ConcurrentHashMap<UUID, WorkPackage> map;
-	private static final WorkPackageList wpl = new WorkPackageList();
+	private static final WorkPackageHandler wpl = new WorkPackageHandler();
 
-	private WorkPackageList() {
+	private WorkPackageHandler() {
 		map = new ConcurrentHashMap<>();
 	}
 
-	public static WorkPackageList getInstance() {
+	public static WorkPackageHandler getInstance() {
 		return wpl;
 	}
 
