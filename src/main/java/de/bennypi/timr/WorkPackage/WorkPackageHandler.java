@@ -3,6 +3,7 @@ package de.bennypi.timr.WorkPackage;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
+// TODO: Remember if last workpackage is complete
 public class WorkPackageHandler {
 
 	private ConcurrentHashMap<UUID, WorkPackage> map;

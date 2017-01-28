@@ -51,11 +51,19 @@ public class WorkPackageResource {
 	 * 
 	 * @return The UUID of the workpackage
 	 */
+	//TODO: Change path to "start", rename function
 	@POST
 	@Produces(MediaType.TEXT_PLAIN)
 	public String addEntry() {
 		WorkPackage wp = new WorkPackage.WorkPackageBuilder(Calendar.getInstance()).createWorkPackage();
 		list.addWorkPackage(wp);
 		return "UUID for Entry: " + wp.getId();
+	}
+	
+	@POST
+	@Produces(MediaType.TEXT_PLAIN)
+	public String finishPackage() {
+		//TODO: implement, add optional description
+		return null;
 	}
 }

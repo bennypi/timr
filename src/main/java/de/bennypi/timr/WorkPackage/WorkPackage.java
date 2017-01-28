@@ -49,6 +49,7 @@ public class WorkPackage {
 
 	@Override
 	public String toString() {
+		// TODO: Extend to full details, check for null
 		return "Details for workpackage " + id + "\n" + "Starting Time: " + startingTime.getTime().toString();
 	}
 
