@@ -1,10 +1,11 @@
 package de.bennypi.timr.WorkPackage;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-// TODO: Remember if last workpackage is complete
 public class WorkPackageHandler {
 
 	private ConcurrentHashMap<UUID, WorkPackage> map;
@@ -28,8 +29,8 @@ public class WorkPackageHandler {
 		map.put(wp.getId(), wp);
 		return wp.getId();
 	}
-	
-	public WorkPackage stopWorkPackage(){
+
+	public WorkPackage stopWorkPackage() {
 		map.get(currentPackage).setEndingTime(Calendar.getInstance());
 		UUID id = currentPackage;
 		currentPackage = null;
@@ -42,5 +43,9 @@ public class WorkPackageHandler {
 
 	public int size() {
 		return map.size();
+	}
+
+	public ArrayList<UUID> getUUIDs() {
+		return Collections.list(map.keys());
 	}
 }
