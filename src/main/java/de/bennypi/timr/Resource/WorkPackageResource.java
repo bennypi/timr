@@ -19,7 +19,7 @@ import de.bennypi.timr.WorkPackage.WorkPackageHandler;
 @Path("workpackage")
 public class WorkPackageResource {
 
-	private WorkPackageHandler list = WorkPackageHandler.getInstance();
+	private WorkPackageHandler handler = WorkPackageHandler.getInstance();
 
 	/**
 	 * Return all workpackges
@@ -28,7 +28,7 @@ public class WorkPackageResource {
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
 	public String getAll() {
-		return "Number of Entries: " + list.size();
+		return "Number of Entries: " + handler.size();
 	}
 
 	/**
@@ -42,7 +42,7 @@ public class WorkPackageResource {
 	@Path("{id}")
 	@Produces(MediaType.TEXT_PLAIN)
 	public String getEntry(@PathParam("id") String id) {
-		WorkPackage wp = list.getWorkPackage(UUID.fromString(id));
+		WorkPackage wp = handler.getWorkPackage(UUID.fromString(id));
 		return wp == null ? "UUID is unknown" : wp.toString();
 	}
 
@@ -53,17 +53,17 @@ public class WorkPackageResource {
 	 */
 	//TODO: Change path to "start", rename function
 	@POST
+	@Path("/start")
 	@Produces(MediaType.TEXT_PLAIN)
-	public String addEntry() {
-		WorkPackage wp = new WorkPackage.WorkPackageBuilder(Calendar.getInstance()).createWorkPackage();
-		list.addWorkPackage(wp);
-		return "UUID for Entry: " + wp.getId();
+	public String startPackage() {
+		return "UUID for Entry: " + handler.startWorkPackage();
 	}
 	
 	@POST
+	@Path("/stop")
 	@Produces(MediaType.TEXT_PLAIN)
 	public String finishPackage() {
-		//TODO: implement, add optional description
-		return null;
+		WorkPackage wp = handler.stopWorkPackage();
+		return wp.toString();
 	}
 }

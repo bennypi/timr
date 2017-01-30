@@ -49,8 +49,11 @@ public class WorkPackage {
 
 	@Override
 	public String toString() {
-		// TODO: Extend to full details, check for null
-		return "Details for workpackage " + id + "\n" + "Starting Time: " + startingTime.getTime().toString();
+		String str = "Details for workpackage " + id + "\n";
+		str += "Starting Time: " + startingTime.getTime().toString() + "\n";
+		str += "Ending Time:" + endingTime == null ? "Still running" : endingTime.getTime().toString() + "\n";
+		str += "Description: " + description == null ? "Not available" : description;
+		return str;
 	}
 
 	public static class WorkPackageBuilder {
