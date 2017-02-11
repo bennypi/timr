@@ -25,12 +25,16 @@ public class WorkPackageHandler {
 			stopWorkPackage();
 		}
 		WorkPackage wp = new WorkPackage.WorkPackageBuilder(Calendar.getInstance()).createWorkPackage();
-		currentPackage = wp.getId();
-		map.put(wp.getId(), wp);
-		return wp.getId();
+		UUID id = UUID.randomUUID();
+		currentPackage = id;
+		map.put(id, wp);
+		return id;
 	}
 
 	public WorkPackage stopWorkPackage() {
+		if (currentPackage == null) {
+			return null;
+		}
 		map.get(currentPackage).setEndingTime(Calendar.getInstance());
 		UUID id = currentPackage;
 		currentPackage = null;
@@ -47,5 +51,18 @@ public class WorkPackageHandler {
 
 	public List<UUID> getUUIDs() {
 		return Collections.list(map.keys());
+	}
+
+	public WorkPackage getCurrent() {
+		return currentPackage == null ? null : map.get(currentPackage);
+	}
+
+	public WorkPackage updateWorkPackage(UUID id, WorkPackage wp) {
+		if (map.contains(id)) {
+			map.put(id, wp);
+			return wp;
+		} else {
+			return null;
+		}
 	}
 }

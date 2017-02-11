@@ -1,7 +1,6 @@
 package de.bennypi.timr.workpackage;
 
 import java.util.Calendar;
-import java.util.UUID;
 
 /**
  * This class represents a single workpackage
@@ -13,13 +12,11 @@ public class WorkPackage {
 	private Calendar startingTime;
 	private Calendar endingTime;
 	private String description;
-	private UUID id;
 
 	private WorkPackage(Calendar startingTime, Calendar endingTime, String description) {
 		this.startingTime = startingTime;
 		this.endingTime = endingTime;
 		this.description = description;
-		this.id = UUID.randomUUID();
 	}
 
 	public Calendar getStartingTime() {
@@ -46,16 +43,12 @@ public class WorkPackage {
 		this.description = description;
 	}
 
-	public UUID getId() {
-		return this.id;
-	}
-
 	@Override
 	public String toString() {
-		String str = "Details for workpackage " + id + "\n";
+		String str = "Details for this workpackage:\n";
 		str += "Starting Time: " + startingTime.getTime().toString() + "\n";
-		str += "Ending Time:" + (endingTime == null ? "Still running" : endingTime.getTime().toString() + "\n");
-		str += "Description: " + (description == null ? "Not available" : description);
+		str += "Ending Time: " + (endingTime == null ? "Still running \n" : endingTime.getTime().toString() + "\n");
+		str += "Description: " + (description == null ? "" : description);
 		return str;
 	}
 
