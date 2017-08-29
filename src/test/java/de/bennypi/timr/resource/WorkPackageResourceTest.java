@@ -22,13 +22,15 @@ public class WorkPackageResourceTest extends JerseyTest {
 
 	@Test
 	public void testGetAll() {
-		Response output = target("/workpackage").request().get();
+		Response output = target("/workpackage/all").request().get();
 		assertEquals("should return status 200", 200, output.getStatus());
 		assertNotNull("Should return list", output.getEntity());
+		// todo: Check output 
 	}
 
 	@Test
 	public void testGetEntry() {
 		Response output = target("/workpackage").request().get();
+		// todo: Test the output
 	}
 }

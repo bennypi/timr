@@ -16,12 +16,6 @@ public class WorkPackageHandlerTest {
 
 	@Test
 	public void testWorkPackage() {
-		try {
-			handler.stopWorkPackage();
-			fail("There is no package to stop");
-		} catch (RuntimeException e) {
-			assertThat(e.getMessage(), is("No open workpackage"));
-		}
 		UUID id = handler.startWorkPackage();
 		assertThat(id, is(notNullValue()));
 

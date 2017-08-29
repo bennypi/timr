@@ -8,16 +8,16 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class WorkPackageHandler {
 
-	private ConcurrentHashMap<UUID, WorkPackage> map;
-	private static final WorkPackageHandler wpl = new WorkPackageHandler();
+	private ConcurrentHashMap<UUID, WorkPackage> workPackages;
+	private static final WorkPackageHandler handler = new WorkPackageHandler();
 	private UUID currentPackage = null;
 
 	private WorkPackageHandler() {
-		map = new ConcurrentHashMap<>();
+		workPackages = new ConcurrentHashMap<>();
 	}
 
 	public static WorkPackageHandler getInstance() {
-		return wpl;
+		return handler;
 	}
 
 	public UUID startWorkPackage() {
@@ -27,7 +27,7 @@ public class WorkPackageHandler {
 		WorkPackage wp = new WorkPackage.WorkPackageBuilder(Calendar.getInstance()).createWorkPackage();
 		UUID id = UUID.randomUUID();
 		currentPackage = id;
-		map.put(id, wp);
+		workPackages.put(id, wp);
 		return id;
 	}
 
@@ -35,31 +35,31 @@ public class WorkPackageHandler {
 		if (currentPackage == null) {
 			return null;
 		}
-		map.get(currentPackage).setEndingTime(Calendar.getInstance());
+		workPackages.get(currentPackage).setEndingTime(Calendar.getInstance());
 		UUID id = currentPackage;
 		currentPackage = null;
-		return map.get(id);
+		return workPackages.get(id);
 	}
 
 	public WorkPackage getWorkPackage(UUID id) {
-		return map.get(id);
+		return workPackages.get(id);
 	}
 
 	public int size() {
-		return map.size();
+		return workPackages.size();
 	}
 
 	public List<UUID> getUUIDs() {
-		return Collections.list(map.keys());
+		return Collections.list(workPackages.keys());
 	}
 
 	public WorkPackage getCurrent() {
-		return currentPackage == null ? null : map.get(currentPackage);
+		return currentPackage == null ? null : workPackages.get(currentPackage);
 	}
 
 	public WorkPackage updateWorkPackage(UUID id, WorkPackage wp) {
-		if (map.contains(id)) {
-			map.put(id, wp);
+		if (workPackages.contains(id)) {
+			workPackages.put(id, wp);
 			return wp;
 		} else {
 			return null;
