@@ -19,11 +19,11 @@ public class WorkPackageHandlerTest {
 		UUID id = handler.startWorkPackage();
 		assertThat(id, is(notNullValue()));
 
-		WorkPackage wp = handler.getWorkPackage(id);
+		WorkPackage wp = handler.getWorkPackage(id).get();
 		assertThat(wp, is(notNullValue()));
 		assertThat(wp.getStartingTime(), is(notNullValue()));
 
-		wp = handler.stopWorkPackage();
+		wp = handler.stopWorkPackage().get();
 		assertThat(wp.getStartingTime(), is(notNullValue()));
 		assertThat(wp.getEndingTime(), is(notNullValue()));
 

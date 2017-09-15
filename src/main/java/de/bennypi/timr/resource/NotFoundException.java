@@ -1,21 +1,26 @@
 package de.bennypi.timr.resource;
 
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
-public class NotFoundException extends WebApplicationException {
+/*
+@ResponseStatus(HttpStatus.NOT_FOUND)
+class UserNotFoundException extends RuntimeException {
+
+	public UserNotFoundException(String userId) {
+		super("could not find user '" + userId + "'.");
+	}
+}
+*/
+
+@ResponseStatus(HttpStatus.NOT_FOUND)
+public class NotFoundException extends RuntimeException {
 
 	public NotFoundException() {
-		super(Response.status(Response.Status.NOT_FOUND).type(MediaType.TEXT_PLAIN).build());
+		super();
 	}
 
-	public NotFoundException(String message) {
-		super(Response.status(Response.Status.NOT_FOUND).entity(message).type(MediaType.TEXT_PLAIN).build());
+	public NotFoundException(String id) {
+		super("could not find entity with id: '" + id + "'.");
 	}
-
-	public NotFoundException(JsonError jse) {
-		super(Response.status(Response.Status.NOT_FOUND).entity(jse).type(MediaType.APPLICATION_JSON).build());
-	}
-
 }
